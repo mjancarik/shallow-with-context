@@ -1,0 +1,96 @@
+{
+  "name": "shallow-with-context",
+  "version": "0.0.1",
+  "description": "The module is temporary workaround for passing context for shallow rendering",
+  "main": "dist/shallowWithContext.cjs.js",
+  "module": "dist/shallowWithContext.esm.js",
+  "scripts": {
+    "preversion": "npm test && npm run lint && npm run build",
+    "postversion": "npm run build && npm run changelog && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish",
+    "lint": "node_modules/.bin/eslint -c ./.eslintrc.js --fix './**/*.{js,jsx}' --ignore-path ./.prettierignore",
+    "test": "node_modules/.bin/jest --no-watchman",
+    "build": "node_modules/.bin/rollup -c",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1",
+    "commit": "node_modules/.bin/git-cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjancarik/shallow-with-context.git"
+  },
+  "keywords": [
+    "React",
+    "Shallow",
+    "Enzyme",
+    "Context"
+  ],
+  "author": "Miroslav Jancarik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mjancarik/shallow-with-context/issues"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "homepage": "https://github.com/mjancarik/shallow-with-context#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.7.5",
+    "@babel/preset-react": "^7.7.4",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "commitizen": "^4.0.3",
+    "conventional-changelog-cli": "^2.0.28",
+    "coveralls": "^3.0.9",
+    "cz-conventional-changelog": "^3.0.2",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.3",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-jest": "^23.1.1",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.17.0",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "rollup": "^1.27.9"
+  },
+  "jest": {
+    "bail": false,
+    "verbose": true,
+    "testEnvironment": "node",
+    "coverageThreshold": {
+      "global": {
+        "functions": 30,
+        "lines": 30,
+        "statements": 30
+      }
+    },
+    "collectCoverageFrom": [
+      "<rootDir>/src/**/*.{js,jsx}"
+    ],
+    "modulePaths": [
+      "<rootDir>/"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "testRegex": "(/__tests__/.*(Spec))\\.jsx?$"
+  },
+  "dependencies": {},
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "precommit": "npm run lint",
+      "commitmsg": "node_modules/.bin/commitlint -e $HUSKY_GIT_PARAMS"
+    }
+  }
+}
