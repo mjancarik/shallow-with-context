@@ -14,7 +14,8 @@ const config = {
       format: 'esm',
       exports: 'named'
     }
-  ]
+  ],
+  external: ['to-aop']
 };
 
 export default config;
