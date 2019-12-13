@@ -1,3 +1,8 @@
+<a name="0.1.1"></a>
+## [0.1.1](https://github.com/mjancarik/shallow-with-context/compare/0.1.0...0.1.1) (2019-12-13)
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://github.com/mjancarik/shallow-with-context/compare/0.0.1...0.1.0) (2019-12-13)
 
