@@ -19,7 +19,7 @@ npm i shallow-with-context --save-dev
 
 ``` javascript
 import { shallow } from 'enzyme';
-import { withContext } from 'shallow-with-context';
+import { withContext, createContext } from 'shallow-with-context';
 import React from 'react';
 
 const MyContext = React.createContext({ text: 'default' });
@@ -32,7 +32,7 @@ class Component extends React.Component {
 
 describe('your description', () => {
   it('your spec', () => {
-    const context = { text: 'new value' };
+    const context = createContext({ text: 'new value' });
     const ComponentWithContext = withContext(Component, context);
 
     const wrapper = shallow(ComponentWithContext, { context });
@@ -48,3 +48,8 @@ describe('your description', () => {
 
 -   `Component` (React.Component|React.PureComponent|function)
 -   `context` Object<string, *>
+
+### createContext
+#### Parameters
+
+-   `value` (*)

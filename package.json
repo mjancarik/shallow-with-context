@@ -81,7 +81,9 @@
     ],
     "testRegex": "(/__tests__/.*(Spec))\\.jsx?$"
   },
-  "dependencies": {},
+  "dependencies": {
+    "to-aop": "^0.3.0"
+  },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
