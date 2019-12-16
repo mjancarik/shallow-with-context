@@ -17,7 +17,7 @@ npm i shallow-with-context --save-dev
 
 ## Usage
 
-``` javascript
+``` jsx
 import { shallow } from 'enzyme';
 import { withContext, createContext } from 'shallow-with-context';
 import React from 'react';
