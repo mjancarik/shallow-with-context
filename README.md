@@ -35,7 +35,7 @@ describe('your description', () => {
     const context = createContext({ text: 'new value' });
     const ComponentWithContext = withContext(Component, context);
 
-    const wrapper = shallow(ComponentWithContext, { context });
+    const wrapper = shallow(<ComponentWithContext />, { context });
 
     expect(wrapper).toMatchInlineSnapshot('<div>new value</div>');
   });
