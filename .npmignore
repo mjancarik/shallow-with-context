@@ -7,7 +7,7 @@
 .npmrc
 .prettierignore
 .travis.yml
-.DB_Store
+.DS_Store
 README.md
 CHANGELOG.md
 commitlint.config.js
