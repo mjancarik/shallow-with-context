@@ -17,7 +17,7 @@ npm i shallow-with-context --save-dev
 
 ## Usage
 
-``` javascript
+``` jsx
 import { shallow } from 'enzyme';
 import { withContext, createContext } from 'shallow-with-context';
 import React from 'react';
@@ -35,7 +35,7 @@ describe('your description', () => {
     const context = createContext({ text: 'new value' });
     const ComponentWithContext = withContext(Component, context);
 
-    const wrapper = shallow(ComponentWithContext, { context });
+    const wrapper = shallow(<ComponentWithContext />, { context });
 
     expect(wrapper).toMatchInlineSnapshot('<div>new value</div>');
   });
