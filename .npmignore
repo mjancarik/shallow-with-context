@@ -7,7 +7,10 @@
 .npmrc
 .prettierignore
 .travis.yml
+.DB_Store
 README.md
+CHANGELOG.md
 commitlint.config.js
 rollup.config.js
+babel.config.js
 setupJest.js
