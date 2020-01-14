@@ -15,7 +15,7 @@ const config = {
       exports: 'named'
     }
   ],
-  external: ['to-aop']
+  external: ['to-aop', 'create-clone-class']
 };
 
 export default config;
