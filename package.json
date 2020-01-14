@@ -33,31 +33,31 @@
   },
   "homepage": "https://github.com/mjancarik/shallow-with-context#readme",
   "devDependencies": {
-    "@babel/core": "^7.7.5",
-    "@babel/plugin-transform-modules-commonjs": "^7.7.5",
-    "@babel/preset-react": "^7.7.4",
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.8.3",
+    "@babel/preset-react": "^7.8.3",
+    "@commitlint/cli": "^8.3.4",
+    "@commitlint/config-conventional": "^8.3.4",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "commitizen": "^4.0.3",
     "conventional-changelog-cli": "^2.0.31",
     "coveralls": "^3.0.9",
     "cz-conventional-changelog": "^3.0.2",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.3",
-    "eslint": "^6.7.2",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-jest": "^23.1.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-jest": "^23.6.0",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.17.0",
-    "husky": "^3.1.0",
+    "husky": "^4.0.7",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "rollup": "^1.27.13"
+    "rollup": "^1.29.0"
   },
   "jest": {
     "bail": false,
@@ -82,8 +82,8 @@
     "testRegex": "(/__tests__/.*(Spec))\\.jsx?$"
   },
   "dependencies": {
-    "create-clone-class": "0.0.2",
-    "to-aop": "^0.3.1"
+    "create-clone-class": "0.1.0",
+    "to-aop": "^0.3.2"
   },
   "config": {
     "commitizen": {
