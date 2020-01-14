@@ -6,7 +6,7 @@ import { withContext, createContext } from '../shallowWithContext';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('shallowWithContenxt module', () => {
+describe('shallowWithContext module', () => {
   let context = {
     dispatch: () => {}
   };
@@ -26,6 +26,10 @@ describe('shallowWithContenxt module', () => {
       super(props, context);
     }
 
+    bar() {
+      return this.context.dispatch();
+    }
+
     componentDidMount() {
       this.context.dispatch();
     }
@@ -41,6 +45,10 @@ describe('shallowWithContenxt module', () => {
     }
 
     componentDidUpdate() {
+      return this.context;
+    }
+
+    foo() {
       return this.context;
     }
 
@@ -147,22 +155,36 @@ describe('shallowWithContenxt module', () => {
     `);
   });
 
-  it('should not modified original class component for context wtih primitive value', () => {
+  it('should not modified original class component for context with primitive value', () => {
     context = createContext('light');
-    withContext(ThemeClassComponent, context);
-    const wrapper = shallow(<ThemeClassComponent />, { context });
-
-    expect(ThemeClassComponent.prototype.render.toString())
-      .toMatchInlineSnapshot(`
-      "render() {
-            return _react.default.createElement(\\"div\\", null, this.context);
-          }"
-    `);
+    const ThemeContextComponent = withContext(ThemeClassComponent, context);
+    const wrapper = shallow(<ThemeContextComponent />, { context });
 
     expect(wrapper).toMatchInlineSnapshot(`
       <div>
-        <Component />
+        light
       </div>
     `);
+  });
+
+  it('should passed context when calling a class function via `.instance()` for context with primitive value', () => {
+    context = createContext('light');
+    const ThemeContextComponent = withContext(ThemeClassComponent, context);
+    const wrapper = shallow(<ThemeContextComponent />, { context });
+
+    expect(wrapper.instance().foo()).toBe('light');
+  });
+
+  it('should passed context when calling a class function via `.instance()` for context with object value', () => {
+    context.dispatch = jest.fn();
+    const classContext = createContext(context);
+    const ContextComponent = withContext(ClassComponent, classContext);
+    const wrapper = shallow(<ContextComponent text="text" />, {
+      context: classContext
+    });
+
+    wrapper.instance().bar();
+
+    expect(context.dispatch).toHaveBeenCalled();
   });
 });

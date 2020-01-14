@@ -1,10 +1,11 @@
 import { aop, hookName, createHook } from 'to-aop';
+import createCloneClass from 'create-clone-class';
 
 const SHALLOW_CONTEXT_FLAG = '__SHALLOW_CONTEXT_FLAG__';
 
 const classHookAround = createHook(
   hookName.aroundMethod,
-  /^(render|shouldComponentUpdate|getSnapshotBeforeUpdate|componentDidUpdate|componentDidMount|componentWillUnmount)$/,
+  /.*/,
   ({ object, property, context, args }) => {
     const originalContext = context.context;
     context.context = Object.prototype.hasOwnProperty.call(
@@ -78,42 +79,17 @@ export function cloneComponent(Component) {
             : context
         );
       }
-
-      shouldComponentUpdate(...rest) {
-        return super.shouldComponentUpdate
-          ? super.shouldComponentUpdate(...rest)
-          : true;
-      }
-
-      getSnapshotBeforeUpdate(...rest) {
-        return super.getSnapshotBeforeUpdate
-          ? super.getSnapshotBeforeUpdate(...rest)
-          : undefined;
-      }
-
-      componentDidUpdate(...rest) {
-        return super.componentDidUpdate
-          ? super.componentDidUpdate(...rest)
-          : undefined;
-      }
-
-      componentDidMount(...rest) {
-        return super.componentDidMount
-          ? super.componentDidMount(...rest)
-          : undefined;
-      }
-
-      render(...rest) {
-        return super.render(...rest);
-      }
     }
 
+    const CloneLegacyContextComponent = createCloneClass(
+      LegacyContextComponent
+    );
     const originalConsoleWarn = console.warn;
     console.warn = () => {};
-    aop(LegacyContextComponent, classHookAround);
+    aop(CloneLegacyContextComponent, classHookAround);
     console.warn = originalConsoleWarn;
 
-    return LegacyContextComponent;
+    return CloneLegacyContextComponent;
   } else {
     if (Component.__isCloneComponent__) {
       Component = Component.__cloneFromComponent__;
