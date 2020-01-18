@@ -57,6 +57,19 @@ describe('shallowWithContext module', () => {
     }
   }
 
+  class ClassComponentWithoutContext extends React.Component {
+    constructor() {
+      super();
+      this.doSomething();
+    }
+
+    doSomething() {}
+
+    render() {
+      return <div>{this.props.text}</div>;
+    }
+  }
+
   it('should shallow render class component for context with object value', () => {
     const ContextComponent = withContext(ClassComponent, context);
     const wrapper = shallow(<ContextComponent text="text" />, { context });
@@ -186,5 +199,19 @@ describe('shallowWithContext module', () => {
     wrapper.instance().bar();
 
     expect(context.dispatch).toHaveBeenCalled();
+  });
+
+  it('without context', () => {
+    const classContext = createContext();
+    const ContextComponent = withContext(
+      ClassComponentWithoutContext,
+      classContext
+    );
+
+    expect(() => {
+      shallow(<ContextComponent text="text" />, {
+        context: classContext
+      });
+    }).not.toThrow();
   });
 });

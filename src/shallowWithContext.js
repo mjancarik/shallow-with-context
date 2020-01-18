@@ -8,12 +8,19 @@ const classHookAround = createHook(
   /.*/,
   ({ object, property, context, args }) => {
     const originalContext = context.context;
-    context.context = Object.prototype.hasOwnProperty.call(
-      originalContext,
-      SHALLOW_CONTEXT_FLAG
-    )
-      ? originalContext.value
-      : originalContext;
+
+    if (
+      originalContext &&
+      typeof originalContext === 'object' &&
+      !Array.isArray(originalContext)
+    ) {
+      context.context = Object.prototype.hasOwnProperty.call(
+        originalContext,
+        SHALLOW_CONTEXT_FLAG
+      )
+        ? originalContext.value
+        : originalContext;
+    }
 
     const originalResult = Reflect.apply(object[property], context, args);
     context.context = originalContext;
