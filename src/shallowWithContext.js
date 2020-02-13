@@ -48,9 +48,15 @@ export function withContext(Component, context) {
     return Component;
   }
 
-  if (typeof Component !== 'function') {
+  const isValidComponent =
+    typeof Component === 'function' ||
+    (typeof Component === 'object' &&
+      Component.type &&
+      Component.WrappedComponent);
+
+  if (!isValidComponent) {
     throw new TypeError(
-      `The defined Component must be function. You give type of ${typeof Component}.`
+      `The defined Component must be function or specific react object. You give type of ${typeof Component}.`
     );
   }
 

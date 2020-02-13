@@ -1,6 +1,8 @@
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
+import { connect, Provider } from 'react-redux';
+import { createStore } from 'redux';
 
 import { withContext, createContext } from '../shallowWithContext';
 
@@ -38,6 +40,50 @@ describe('shallowWithContext module', () => {
       return <div>{this.props.text}</div>;
     }
   }
+
+  class ClassReduxComponent extends React.Component {
+    render() {
+      return <div>{this.props.todos.concat(',')}</div>;
+    }
+  }
+
+  function todos(state = [], action) {
+    switch (action.type) {
+      case 'ADD_TODO':
+        return {
+          ...state,
+          todos: state.todos.concat([action.payload.content])
+        };
+      default:
+        return state;
+    }
+  }
+
+  function addTodo(content) {
+    return {
+      type: 'ADD_TODO',
+      payload: {
+        content
+      }
+    };
+  }
+
+  const store = createStore(todos, { todos: ['Use Redux'] });
+
+  const mapStateToProps = state => {
+    return {
+      todos: state.todos
+    };
+  };
+
+  function ReduxProvider(props) {
+    const { children } = props;
+    return <Provider store={props.store}>{children}</Provider>;
+  }
+
+  const ConnectedClassReduxComponent = connect(mapStateToProps, { addTodo })(
+    ClassReduxComponent
+  );
 
   class ThemeClassComponent extends React.Component {
     componentDidMount() {
@@ -213,5 +259,43 @@ describe('shallowWithContext module', () => {
         context: classContext
       });
     }).not.toThrow();
+  });
+
+  it('should shallow render connected class component with redux', () => {
+    const classContext = createContext({ store });
+    const ContextComponent = withContext(
+      ConnectedClassReduxComponent,
+      classContext
+    );
+
+    const wrapper = shallow(<ContextComponent store={store} />, {
+      wrappingComponent: ReduxProvider,
+      wrappingComponentProps: classContext.value,
+      context: classContext
+    });
+
+    expect(wrapper).toMatchInlineSnapshot(`
+      <ContextProvider
+        value={null}
+      >
+        <ClassReduxComponent
+          addTodo={[Function]}
+          store={
+            Object {
+              "dispatch": [Function],
+              "getState": [Function],
+              "replaceReducer": [Function],
+              "subscribe": [Function],
+              Symbol(observable): [Function],
+            }
+          }
+          todos={
+            Array [
+              "Use Redux",
+            ]
+          }
+        />
+      </ContextProvider>
+    `);
   });
 });
