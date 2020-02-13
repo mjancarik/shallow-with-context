@@ -1,3 +1,13 @@
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/mjancarik/shallow-with-context/compare/0.2.1...0.2.2) (2020-02-13)
+
+
+### Features
+
+* **redux:** added support for connected component with redux ([0b3105b](https://github.com/mjancarik/shallow-with-context/commit/0b3105b))
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/mjancarik/shallow-with-context/compare/0.2.0...0.2.1) (2020-01-18)
 
