@@ -17,9 +17,13 @@ npm i shallow-with-context --save-dev
 
 ## Usage
 
+### Context is object
+
+You don't have to use `createContext` method from `shallow-with-context` module for context as object.  
+
 ``` jsx
 import { shallow } from 'enzyme';
-import { withContext, createContext } from 'shallow-with-context';
+import { withContext } from 'shallow-with-context';
 import React from 'react';
 
 const MyContext = React.createContext({ text: 'default' });
@@ -32,7 +36,36 @@ class Component extends React.Component {
 
 describe('your description', () => {
   it('your spec', () => {
-    const context = createContext({ text: 'new value' });
+    const context = { text: 'new value' };
+    const ComponentWithContext = withContext(Component, context);
+
+    const wrapper = shallow(<ComponentWithContext />, { context });
+
+    expect(wrapper).toMatchInlineSnapshot('<div>new value</div>');
+  });
+});
+```
+
+### Context is primitive value
+
+You have to use `createContext` method from `shallow-with-context` module for context as primitive value because Legacy Context API don't support primitive value. 
+
+``` jsx
+import { shallow } from 'enzyme';
+import { withContext, createContext } from 'shallow-with-context';
+import React from 'react';
+
+const MyContext = React.createContext('default');
+class Component extends React.Component {
+  static contextType = MyContext;
+  render() {
+    return <div>{this.context}</div>
+  }
+}
+
+describe('your description', () => {
+  it('your spec', () => {
+    const context = createContext('new value');
     const ComponentWithContext = withContext(Component, context);
 
     const wrapper = shallow(<ComponentWithContext />, { context });
@@ -46,7 +79,7 @@ describe('your description', () => {
 ### withContext
 #### Parameters
 
--   `Component` (React.Component|React.PureComponent|function)
+-   `Component` (React.Component|React.PureComponent|function|ReactObject)
 -   `context` Object<string, *>
 
 ### createContext
