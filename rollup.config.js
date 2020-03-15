@@ -1,7 +1,7 @@
 const config = {
   input: 'src/shallowWithContext.js',
   treeshake: {
-    pureExternalModules: true
+    moduleSideEffects: 'no-external'
   },
   output: [
     {
