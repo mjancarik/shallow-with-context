@@ -34,6 +34,7 @@
   "homepage": "https://github.com/mjancarik/shallow-with-context#readme",
   "devDependencies": {
     "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-transform-modules-commonjs": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "@commitlint/cli": "^8.3.4",

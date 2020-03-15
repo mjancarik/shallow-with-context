@@ -116,6 +116,20 @@ describe('shallowWithContext module', () => {
     }
   }
 
+  const MyContext = React.createContext({});
+  class ClassComponentWithClassProperties extends React.Component {
+    static contextType = MyContext;
+
+    render() {
+      const { type } = this.context;
+      return (
+        <div>
+          {type}, {this.props.prop}
+        </div>
+      );
+    }
+  }
+
   it('should shallow render class component for context with object value', () => {
     const ContextComponent = withContext(ClassComponent, context);
     const wrapper = shallow(<ContextComponent text="text" />, { context });
@@ -296,6 +310,26 @@ describe('shallowWithContext module', () => {
           }
         />
       </ContextProvider>
+    `);
+  });
+
+  it('should shallow render class component with context defined as class properties', () => {
+    const defaultProps = { prop: 'value' };
+    const context = createContext({ type: 'user' });
+    const MyComponentWithContext = withContext(
+      ClassComponentWithClassProperties,
+      context
+    );
+
+    const component = shallow(<MyComponentWithContext {...defaultProps} />, {
+      context: context
+    });
+    expect(component).toMatchInlineSnapshot(`
+      <div>
+        user
+        , 
+        value
+      </div>
     `);
   });
 });
