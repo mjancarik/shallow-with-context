@@ -1,6 +1,6 @@
 {
   "name": "shallow-with-context",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "The module is temporary workaround for passing context for shallow rendering",
   "main": "dist/shallowWithContext.cjs.js",
   "module": "dist/shallowWithContext.esm.js",

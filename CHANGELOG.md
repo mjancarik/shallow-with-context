@@ -1,3 +1,8 @@
+<a name="0.2.3"></a>
+## [0.2.3](https://github.com/mjancarik/shallow-with-context/compare/0.2.2...0.2.3) (2020-03-15)
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/mjancarik/shallow-with-context/compare/0.2.1...0.2.2) (2020-02-13)
 
