@@ -7,7 +7,7 @@ const classHookAround = createHook(
   hookName.aroundMethod,
   /.*/,
   ({ object, property, context, args }) => {
-    const originalContext = context.context;
+    const originalContext = context ? context.context : undefined;
 
     if (
       originalContext &&
@@ -23,7 +23,10 @@ const classHookAround = createHook(
     }
 
     const originalResult = Reflect.apply(object[property], context, args);
-    context.context = originalContext;
+
+    if (context) {
+      context.context = originalContext;
+    }
 
     return originalResult;
   }

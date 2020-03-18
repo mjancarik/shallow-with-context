@@ -116,20 +116,6 @@ describe('shallowWithContext module', () => {
     }
   }
 
-  const MyContext = React.createContext({});
-  class ClassComponentWithClassProperties extends React.Component {
-    static contextType = MyContext;
-
-    render() {
-      const { type } = this.context;
-      return (
-        <div>
-          {type}, {this.props.prop}
-        </div>
-      );
-    }
-  }
-
   it('should shallow render class component for context with object value', () => {
     const ContextComponent = withContext(ClassComponent, context);
     const wrapper = shallow(<ContextComponent text="text" />, { context });
@@ -314,14 +300,60 @@ describe('shallowWithContext module', () => {
   });
 
   it('should shallow render class component with context defined as class properties', () => {
+    const MyContext = React.createContext({});
+    class ClassComponentWithClassProperties extends React.Component {
+      static contextType = MyContext;
+
+      render() {
+        const { type } = this.context;
+        return (
+          <div>
+            {type}, {this.props.prop}
+          </div>
+        );
+      }
+    }
+
     const defaultProps = { prop: 'value' };
     const context = createContext({ type: 'user' });
-    const MyComponentWithContext = withContext(
+    const ContextComponent = withContext(
       ClassComponentWithClassProperties,
       context
     );
 
-    const component = shallow(<MyComponentWithContext {...defaultProps} />, {
+    const component = shallow(<ContextComponent {...defaultProps} />, {
+      context: context
+    });
+    expect(component).toMatchInlineSnapshot(`
+      <div>
+        user
+        , 
+        value
+      </div>
+    `);
+  });
+
+  it('should shallow render class component with static react life cycle method', () => {
+    class ClassWithStaticMethod extends React.Component {
+      static getDerivedStateFromProps() {
+        return {};
+      }
+
+      render() {
+        const { type } = this.context;
+        return (
+          <div>
+            {type}, {this.props.prop}
+          </div>
+        );
+      }
+    }
+
+    const defaultProps = { prop: 'value' };
+    const context = createContext({ type: 'user' });
+    const ContextComponent = withContext(ClassWithStaticMethod, context);
+
+    const component = shallow(<ContextComponent {...defaultProps} />, {
       context: context
     });
     expect(component).toMatchInlineSnapshot(`
