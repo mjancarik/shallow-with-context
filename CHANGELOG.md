@@ -1,3 +1,13 @@
+<a name="0.2.4"></a>
+## [0.2.4](https://github.com/mjancarik/shallow-with-context/compare/0.2.3...0.2.4) (2020-03-18)
+
+
+### Bug Fixes
+
+* **staticmethod:** not throw error for reading property context of null ([36d84c3](https://github.com/mjancarik/shallow-with-context/commit/36d84c3))
+
+
+
 <a name="0.2.3"></a>
 ## [0.2.3](https://github.com/mjancarik/shallow-with-context/compare/0.2.2...0.2.3) (2020-03-15)
 
