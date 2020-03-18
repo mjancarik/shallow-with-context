@@ -7,7 +7,7 @@
 
 The module is temporary workaround for passing context in shallow rendering mode. The new React Context API is not supported in shallow rendering mode yet.
 
-It use under hood Legacy Context API.
+It use under hood Legacy Context API and [to-aop](https://www.npmjs.com/package/to-aop) module.
 
 ## Installation
 
