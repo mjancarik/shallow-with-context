@@ -9,9 +9,7 @@ import { withContext, createContext } from '../shallowWithContext';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('shallowWithContext module', () => {
-  let context = {
-    dispatch: () => {}
-  };
+  let context = null;
 
   function InlineComponent(props, context) {
     context.dispatch();
@@ -116,7 +114,26 @@ describe('shallowWithContext module', () => {
     }
   }
 
+  beforeEach(() => {
+    context = {
+      dispatch: () => {}
+    };
+  });
+
   it('should shallow render class component for context with object value', () => {
+    const ContextComponent = withContext(ClassComponent, context);
+    const wrapper = shallow(<ContextComponent text="text" />, { context });
+
+    expect(wrapper).toMatchInlineSnapshot(`
+      <div>
+        text
+      </div>
+    `);
+  });
+
+  it('should call create context multiple times', () => {
+    context = createContext(context);
+    context = createContext(context);
     const ContextComponent = withContext(ClassComponent, context);
     const wrapper = shallow(<ContextComponent text="text" />, { context });
 

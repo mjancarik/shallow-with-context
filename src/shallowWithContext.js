@@ -33,6 +33,13 @@ const classHookAround = createHook(
 );
 
 export function createContext(value) {
+  if (
+    value &&
+    Object.prototype.hasOwnProperty.call(value, SHALLOW_CONTEXT_FLAG)
+  ) {
+    return value;
+  }
+
   let context = {
     value
   };
