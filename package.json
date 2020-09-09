@@ -6,6 +6,7 @@
   "module": "dist/shallowWithContext.esm.js",
   "scripts": {
     "preversion": "npm test && npm run lint && npm run build",
+    "version": "npm run changelog && git add CHANGELOG.md",
     "postversion": "npm run build && npm run changelog && git push && git push --tags && npm publish",
     "lint": "node_modules/.bin/eslint -c ./.eslintrc.js --fix './**/*.{js,jsx}' --ignore-path ./.prettierignore",
     "test": "node_modules/.bin/jest --no-watchman",
