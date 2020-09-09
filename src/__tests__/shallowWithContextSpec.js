@@ -50,7 +50,7 @@ describe('shallowWithContext module', () => {
       case 'ADD_TODO':
         return {
           ...state,
-          todos: state.todos.concat([action.payload.content])
+          todos: state.todos.concat([action.payload.content]),
         };
       default:
         return state;
@@ -61,16 +61,16 @@ describe('shallowWithContext module', () => {
     return {
       type: 'ADD_TODO',
       payload: {
-        content
-      }
+        content,
+      },
     };
   }
 
   const store = createStore(todos, { todos: ['Use Redux'] });
 
-  const mapStateToProps = state => {
+  const mapStateToProps = (state) => {
     return {
-      todos: state.todos
+      todos: state.todos,
     };
   };
 
@@ -116,7 +116,7 @@ describe('shallowWithContext module', () => {
 
   beforeEach(() => {
     context = {
-      dispatch: () => {}
+      dispatch: () => {},
     };
   });
 
@@ -256,7 +256,7 @@ describe('shallowWithContext module', () => {
     const classContext = createContext(context);
     const ContextComponent = withContext(ClassComponent, classContext);
     const wrapper = shallow(<ContextComponent text="text" />, {
-      context: classContext
+      context: classContext,
     });
 
     wrapper.instance().bar();
@@ -273,7 +273,7 @@ describe('shallowWithContext module', () => {
 
     expect(() => {
       shallow(<ContextComponent text="text" />, {
-        context: classContext
+        context: classContext,
       });
     }).not.toThrow();
   });
@@ -288,7 +288,7 @@ describe('shallowWithContext module', () => {
     const wrapper = shallow(<ContextComponent store={store} />, {
       wrappingComponent: ReduxProvider,
       wrappingComponentProps: classContext.value,
-      context: classContext
+      context: classContext,
     });
 
     expect(wrapper).toMatchInlineSnapshot(`
@@ -339,7 +339,7 @@ describe('shallowWithContext module', () => {
     );
 
     const component = shallow(<ContextComponent {...defaultProps} />, {
-      context: context
+      context: context,
     });
     expect(component).toMatchInlineSnapshot(`
       <div>
@@ -371,7 +371,7 @@ describe('shallowWithContext module', () => {
     const ContextComponent = withContext(ClassWithStaticMethod, context);
 
     const component = shallow(<ContextComponent {...defaultProps} />, {
-      context: context
+      context: context,
     });
     expect(component).toMatchInlineSnapshot(`
       <div>

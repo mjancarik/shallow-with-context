@@ -41,13 +41,13 @@ export function createContext(value) {
   }
 
   let context = {
-    value
+    value,
   };
 
   Reflect.defineProperty(context, SHALLOW_CONTEXT_FLAG, {
     value: true,
     enumerable: true,
-    writable: false
+    writable: false,
   });
 
   return context;
@@ -118,13 +118,13 @@ export function cloneComponent(Component) {
       Component = Component.__cloneFromComponent__;
     }
 
-    let LegacyContextComponent = function(props, context, ...rest) {
+    let LegacyContextComponent = function (props, context, ...rest) {
       return Component.apply(this, [
         props,
         Object.prototype.hasOwnProperty.call(context, SHALLOW_CONTEXT_FLAG)
           ? context.value
           : context,
-        ...rest
+        ...rest,
       ]);
     };
     for (let key in Component) {
