@@ -144,6 +144,21 @@ describe('shallowWithContext module', () => {
     `);
   });
 
+  it('should call create context multiple times 2', () => {
+    context = createContext(context);
+    context = createContext(context);
+    let ContextComponent1 = withContext(ClassComponent, context);
+    let ContextComponent2 = withContext(ContextComponent1, context);
+    let ContextComponent3 = withContext(ContextComponent2, context);
+    const wrapper = shallow(<ContextComponent3 text="text" />, { context });
+
+    expect(wrapper).toMatchInlineSnapshot(`
+      <div>
+        text
+      </div>
+    `);
+  });
+
   it('should shallow render class component for context with object value created from createContext', () => {
     context = createContext(context);
     const ContextComponent = withContext(ClassComponent, context);

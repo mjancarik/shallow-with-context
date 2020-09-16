@@ -2,15 +2,20 @@
   "name": "shallow-with-context",
   "version": "0.3.0",
   "description": "The module is temporary workaround for passing context for shallow rendering",
-  "main": "dist/shallowWithContext.cjs.js",
-  "module": "dist/shallowWithContext.esm.js",
+  "main": "dist/shallowWithContext.cjs",
+  "module": "dist/shallowWithContext.mjs",
+  "exports": {
+    "import": "./dist/shallowWithContext.mjs",
+    "require": "./dist/shallowWithContext.cjs"
+  },
   "scripts": {
     "preversion": "npm test && npm run lint && npm run build",
     "version": "npm run changelog && git add CHANGELOG.md",
     "postversion": "npm run build && npm run changelog && git push && git push --tags && npm publish",
     "lint": "node_modules/.bin/eslint -c ./.eslintrc.js --fix './**/*.{js,jsx}' --ignore-path ./.prettierignore",
+    "dev": "node_modules/.bin/rollup -c rollup.config.js --watch",
     "test": "node_modules/.bin/jest --no-watchman",
-    "build": "node_modules/.bin/rollup -c",
+    "build": "node_modules/.bin/rollup -c rollup.config.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1",
     "commit": "node_modules/.bin/git-cz"
   },
@@ -38,8 +43,11 @@
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
-    "@commitlint/cli": "^9.1.2",
-    "@commitlint/config-conventional": "^9.1.2",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-run": "^2.0.2",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.3.0",
     "commitizen": "^4.2.1",
@@ -49,19 +57,19 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4",
     "enzyme-to-json": "^3.5.0",
-    "eslint": "^7.8.1",
+    "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-jest": "^24.0.0",
+    "eslint-plugin-jest": "^24.0.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
     "husky": "^4.3.0",
     "jest": "^26.4.2",
-    "prettier": "^2.1.1",
+    "prettier": "^2.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
-    "rollup": "^2.26.11"
+    "rollup": "^2.27.0"
   },
   "jest": {
     "bail": false,
@@ -86,8 +94,8 @@
     "testRegex": "(/__tests__/.*(Spec))\\.jsx?$"
   },
   "dependencies": {
-    "create-clone-class": "0.1.0",
-    "to-aop": "^0.3.6"
+    "create-clone-class": "^0.2.0",
+    "to-aop": "^0.4.0"
   },
   "config": {
     "commitizen": {

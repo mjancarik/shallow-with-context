@@ -1,5 +1,5 @@
 import { aop, hookName, createHook } from 'to-aop';
-import createCloneClass from 'create-clone-class';
+import { createCloneClass } from 'create-clone-class';
 
 const SHALLOW_CONTEXT_FLAG = '__SHALLOW_CONTEXT_FLAG__';
 
