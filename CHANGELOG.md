@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/mjancarik/shallow-with-context/compare/v0.3.0...v0.4.0) (2020-09-16)
+
+
+### Bug Fixes
+
+* calling withContext on Component more times not modify original class ([00b8475](https://github.com/mjancarik/shallow-with-context/commit/00b847570a9f631341f84e54a328a110ce05bd11))
+
+
+
 # [0.3.0](https://github.com/mjancarik/shallow-with-context/compare/0.2.4...v0.3.0) (2020-09-09)
 
 
