@@ -1,6 +1,6 @@
 # shallow-with-context
 
-[![Build Status](https://travis-ci.org/mjancarik/shallow-with-context.svg?branch=master)](https://travis-ci.org/mjancarik/shallow-with-context) [![dependencies Status](https://david-dm.org/mjancarik/shallow-with-context/status.svg)](https://david-dm.org/mjancarik/shallow-with-context)
+[![Build Status](https://travis-ci.com/mjancarik/shallow-with-context.svg?branch=master)](https://travis-ci.com/mjancarik/shallow-with-context)
 [![Coverage Status](https://coveralls.io/repos/github/mjancarik/shallow-with-context/badge.svg?branch=master)](https://coveralls.io/github/mjancarik/shallow-with-context?branch=master)
 [![NPM package version](https://img.shields.io/npm/v/shallow-with-context/latest.svg)](https://www.npmjs.com/package/shallow-with-context)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
