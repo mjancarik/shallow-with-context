@@ -27,6 +27,11 @@ const config = {
       exports: 'named',
     },
     {
+      file: `./dist/shallowWithContext.js`,
+      format: 'cjs',
+      exports: 'named',
+    },
+    {
       file: `./dist/shallowWithContext.mjs`,
       format: 'esm',
       exports: 'named',

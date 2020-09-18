@@ -2,12 +2,8 @@
   "name": "shallow-with-context",
   "version": "0.4.0",
   "description": "The module is temporary workaround for passing context for shallow rendering",
-  "main": "dist/shallowWithContext.cjs",
-  "module": "dist/shallowWithContext.mjs",
-  "exports": {
-    "import": "./dist/shallowWithContext.mjs",
-    "require": "./dist/shallowWithContext.cjs"
-  },
+  "main": "dist/shallowWithContext",
+  "module": "dist/shallowWithContext",
   "scripts": {
     "preversion": "npm test && npm run lint && npm run build",
     "version": "npm run changelog && git add CHANGELOG.md",
