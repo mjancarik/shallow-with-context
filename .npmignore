@@ -1,5 +1,7 @@
 /src
 /coverage
+.idea/
+.history/
 .babelrc
 .eslintrc.js
 .gitignore
