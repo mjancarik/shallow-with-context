@@ -1,5 +1,5 @@
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@cfaester/enzyme-adapter-react-18';
 import React from 'react';
 import { connect, Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -313,16 +313,16 @@ describe('shallowWithContext module', () => {
         <ClassReduxComponent
           addTodo={[Function]}
           store={
-            Object {
+            {
+              "@@observable": [Function],
               "dispatch": [Function],
               "getState": [Function],
               "replaceReducer": [Function],
               "subscribe": [Function],
-              Symbol(observable): [Function],
             }
           }
           todos={
-            Array [
+            [
               "Use Redux",
             ]
           }
