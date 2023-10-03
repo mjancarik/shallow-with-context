@@ -21,6 +21,8 @@ describe('shallowWithContext module', () => {
     return <span>{context}</span>;
   }
 
+  const MemoThemeInlineComponent = React.memo(ThemeInlineComponent);
+
   class ClassComponent extends React.Component {
     constructor(props, context) {
       super(props, context);
@@ -80,7 +82,7 @@ describe('shallowWithContext module', () => {
   }
 
   const ConnectedClassReduxComponent = connect(mapStateToProps, { addTodo })(
-    ClassReduxComponent
+    ClassReduxComponent,
   );
 
   class ThemeClassComponent extends React.Component {
@@ -206,6 +208,21 @@ describe('shallowWithContext module', () => {
     `);
   });
 
+  it('should shallow render memo function component for context with primitive value', () => {
+    context = createContext('light');
+    const ThemeContextComponent = withContext(
+      MemoThemeInlineComponent,
+      context,
+    );
+    const wrapper = shallow(<ThemeContextComponent />, { context });
+
+    expect(wrapper).toMatchInlineSnapshot(`
+      <span>
+        light
+      </span>
+    `);
+  });
+
   it('should shallow render class component for context with primitive value', () => {
     context = createContext('light');
     const ThemeContextComponent = withContext(ThemeClassComponent, context);
@@ -283,7 +300,7 @@ describe('shallowWithContext module', () => {
     const classContext = createContext();
     const ContextComponent = withContext(
       ClassComponentWithoutContext,
-      classContext
+      classContext,
     );
 
     expect(() => {
@@ -297,7 +314,7 @@ describe('shallowWithContext module', () => {
     const classContext = createContext({ store });
     const ContextComponent = withContext(
       ConnectedClassReduxComponent,
-      classContext
+      classContext,
     );
 
     const wrapper = shallow(<ContextComponent store={store} />, {
@@ -350,7 +367,7 @@ describe('shallowWithContext module', () => {
     const context = createContext({ type: 'user' });
     const ContextComponent = withContext(
       ClassComponentWithClassProperties,
-      context
+      context,
     );
 
     const component = shallow(<ContextComponent {...defaultProps} />, {

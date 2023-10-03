@@ -16,7 +16,7 @@ const classHookAround = createHook(
     ) {
       context.context = Object.prototype.hasOwnProperty.call(
         originalContext,
-        SHALLOW_CONTEXT_FLAG
+        SHALLOW_CONTEXT_FLAG,
       )
         ? originalContext.value
         : originalContext;
@@ -29,7 +29,7 @@ const classHookAround = createHook(
     }
 
     return originalResult;
-  }
+  },
 );
 
 export function createContext(value) {
@@ -58,21 +58,27 @@ export function withContext(Component, context) {
     return Component;
   }
 
+  const isValidMemoComponent =
+    typeof Component === 'object' &&
+    Component.type &&
+    typeof Component.type === 'function' &&
+    Component['$$typeof'];
   const isValidComponent =
     typeof Component === 'function' ||
     (typeof Component === 'object' &&
       Component.type &&
-      Component.WrappedComponent);
+      Component.WrappedComponent) ||
+    isValidMemoComponent;
 
   if (!isValidComponent) {
     throw new TypeError(
-      `The defined Component must be function or specific react object. You give type of ${typeof Component}.`
+      `The defined Component must be function or specific react object. You give type of ${typeof Component}.`,
     );
   }
 
   if (typeof context !== 'object') {
     throw new TypeError(
-      `The defined context must be object. You give type of ${typeof Component}.`
+      `The defined context must be object. You give type of ${typeof Component}.`,
     );
   }
 
@@ -82,10 +88,12 @@ export function withContext(Component, context) {
 
       return accumulatedContext;
     },
-    {}
+    {},
   );
 
-  const LegacyContextComponent = cloneComponent(Component);
+  const LegacyContextComponent = cloneComponent(
+    isValidMemoComponent ? Component.type : Component,
+  );
   LegacyContextComponent.contextTypes = legacyContext;
 
   return LegacyContextComponent;
@@ -99,13 +107,13 @@ export function cloneComponent(Component) {
           props,
           Object.prototype.hasOwnProperty.call(context, SHALLOW_CONTEXT_FLAG)
             ? context.value
-            : context
+            : context,
         );
       }
     }
 
     const CloneLegacyContextComponent = createCloneClass(
-      LegacyContextComponent
+      LegacyContextComponent,
     );
     const originalConsoleWarn = console.warn;
     console.warn = () => {};
