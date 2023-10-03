@@ -1,3 +1,9 @@
+## 0.6.0 (2023-10-03)
+
+* feat(react.memo): added support for memoized react component ([14a2c83](https://github.com/mjancarik/shallow-with-context/commit/14a2c83))
+
+
+
 ## [0.5.1](https://github.com/mjancarik/shallow-with-context/compare/v0.5.0...v0.5.1) (2022-11-08)
 
 
